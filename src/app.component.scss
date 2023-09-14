@@ -1,0 +1,14 @@
+h2 {
+  text-align: center;
+}
+
+.div-cntr {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 15px;
+  background-color: rgba($color: gray, $alpha: 0.2);
+}

@@ -1,0 +1,17 @@
+<h2>{{ 'Football Updates' }}</h2>
+<div class="div-cntr">
+  <button
+    mat-button
+    *ngFor="let country of countries"
+    [attr.id]="(country | lowercase) + 'Select'"
+    (click)="getLeagues(country)"
+  >
+    {{ country }}
+  </button>
+</div>
+
+<ng-container *ngIf="standings$ | async as leagueData">
+  <!-- {{ leagueData | json }} -->
+  <!-- <div *ngFor="let stand of league.standings">{{ league | json }}</div> -->
+  <p *ngFor="let stand of leagueData">{{ stand | json }}</p>
+</ng-container>
