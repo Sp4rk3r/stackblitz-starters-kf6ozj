@@ -1,3 +1,7 @@
+export interface ResponseData {
+  league: LeagueData;
+}
+
 export interface TeamDetails {
   id: number;
   name: string;
@@ -24,9 +28,7 @@ export interface FootballStanding {
   form: string;
   status: string;
   description: string;
-  win: number;
-  lose: number;
-  draw: number;
+  all: GameStats;
 }
 
 export interface LeagueData {

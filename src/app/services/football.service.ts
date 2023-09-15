@@ -3,7 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { BaseResponse } from '../models/base-response';
 import { Country } from '../models/country';
-import { FootballStanding, LeagueData } from '../models/football-standing';
+import {
+  FootballStanding,
+  LeagueData,
+  ResponseData,
+} from '../models/football-standing';
 import { Leagues } from '../models/leagues';
 
 @Injectable()
@@ -30,9 +34,9 @@ export class FootballService {
       .pipe(map((data) => data.response[0]));
   }
 
-  getStanding(leagueId: number): Observable<LeagueData[]> {
+  getStanding(leagueId: number): Observable<ResponseData[]> {
     return this.http
-      .get<BaseResponse<LeagueData[]>>(
+      .get<BaseResponse<ResponseData[]>>(
         `${
           this.url
         }/standings?league=${leagueId}&season=${new Date().getFullYear()}`,

@@ -3,11 +3,11 @@ body::after {
   background: url(https://c4.wallpaperflare.com/wallpaper/196/606/477/champions-league-stadium-football-sports-game-soccer-stadium-wallpaper-preview.jpg);
 }
 
-img {
+/* img {
   opacity: 0.2;
   position: absolute;
   padding: 0;
-}
+} */
 
 app-root {
   z-index: 5;

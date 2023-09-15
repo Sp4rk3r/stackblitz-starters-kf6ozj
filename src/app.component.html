@@ -10,8 +10,44 @@
   </button>
 </div>
 
-<ng-container *ngIf="standings$ | async as leagueData">
-  <!-- {{ leagueData | json }} -->
-  <!-- <div *ngFor="let stand of league.standings">{{ league | json }}</div> -->
-  <p *ngFor="let stand of leagueData">{{ stand | json }}</p>
+<ng-container *ngIf="standings$ | async as responseDataArray">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th></th>
+        <th>Name</th>
+        <th>Gammes</th>
+        <th>W</th>
+        <th>L</th>
+        <th>D</th>
+
+        <th>Goal Difference</th>
+        <th>Points</th>
+        <!-- Add more headers if necessary -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stand of responseDataArray[0].league.standings[0]">
+        <td>{{ stand.rank }}</td>
+        <td class="td-logo">
+          <img
+            [src]="stand.team.logo"
+            alt="{{ stand.team.name }}"
+            width="50"
+            class="img-logo"
+          />
+        </td>
+        <td>{{ stand.team.name }}</td>
+        <td>{{ stand.all.played }}</td>
+        <td>{{ stand.all.win }}</td>
+        <td>{{ stand.all.lose }}</td>
+        <td>{{ stand.all.draw }}</td>
+
+        <td>{{ stand.goalsDiff }}</td>
+        <td>{{ stand.points }}</td>
+        <!-- Add more data columns if necessary -->
+      </tr>
+    </tbody>
+  </table>
 </ng-container>
