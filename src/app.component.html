@@ -3,10 +3,10 @@
   <button
     mat-button
     *ngFor="let country of countries"
-    [attr.id]="(country | lowercase) + 'Select'"
-    (click)="getLeagues(country)"
+    [attr.id]="(country.name | lowercase) + 'Select'"
+    (click)="getLeagues(country.name, country.league)"
   >
-    {{ country }}
+    {{ country.name }}
   </button>
 </div>
 
