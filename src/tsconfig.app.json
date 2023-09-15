@@ -5,8 +5,5 @@
     "types": []
   },
   "files": ["main.ts", "polyfills.ts"],
-  "include": ["**/*.d.ts"],
-  "paths": {
-    "src/*": ["src/app/*"]
-  }
+  "include": ["src/**/*.d.ts"]
 }
