@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
 import { BaseResponse } from '../models/base-response';
 import { Country } from '../models/country';
 import { ResponseData } from '../models/football-standing';
@@ -19,7 +19,10 @@ export class FootballService {
       .get<BaseResponse<Leagues[]>>(
         `/leagues?name=${leagueName}&country=${country}&season=${new Date().getFullYear()}`
       )
-      .pipe(map((data) => data.response[0]));
+      .pipe(
+        map((data) => data.response[0]),
+        shareReplay(1)
+      );
   }
 
   getStanding(leagueId: number): Observable<ResponseData[]> {
@@ -27,6 +30,9 @@ export class FootballService {
       .get<BaseResponse<ResponseData[]>>(
         `/standings?league=${leagueId}&season=${new Date().getFullYear()}`
       )
-      .pipe(map((data) => data.response));
+      .pipe(
+        map((data) => data.response),
+        shareReplay(1)
+      );
   }
 }

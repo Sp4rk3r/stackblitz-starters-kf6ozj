@@ -1,0 +1,44 @@
+<table class="tbl">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th></th>
+      <th>Name</th>
+      <th>Gammes</th>
+      <th>W</th>
+      <th>L</th>
+      <th>D</th>
+
+      <th>Goal Difference</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="ResponseData | async as responseDataArray; else loading">
+    <tr *ngFor="let stand of responseDataArray[0].league.standings[0]">
+      <td>{{ stand.rank }}</td>
+      <td class="td-logo">
+        <img
+          [src]="stand.team.logo"
+          alt="{{ stand.team.name }}"
+          width="50"
+          class="img-logo"
+        />
+      </td>
+      <td>{{ stand.team.name }}</td>
+      <td>{{ stand.all.played }}</td>
+      <td>{{ stand.all.win }}</td>
+      <td>{{ stand.all.lose }}</td>
+      <td>{{ stand.all.draw }}</td>
+
+      <td>{{ stand.goalsDiff }}</td>
+      <td>{{ stand.points }}</td>
+    </tr>
+  </tbody>
+  <ng-template #loading>
+    <tbody>
+      <tr>
+        <td colspan="9">Loading data...</td>
+      </tr>
+    </tbody>
+  </ng-template>
+</table>
