@@ -10,7 +10,7 @@
   </button>
 </div>
 
-<ng-container *ngIf="standings$ | async as responseDataArray">
+<ng-container>
   <table class="tbl">
     <thead>
       <tr>
@@ -27,7 +27,7 @@
         <!-- Add more headers if necessary -->
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="standings$ | async as responseDataArray; else loading">
       <tr *ngFor="let stand of responseDataArray[0].league.standings[0]">
         <td>{{ stand.rank }}</td>
         <td class="td-logo">
@@ -49,5 +49,13 @@
         <!-- Add more data columns if necessary -->
       </tr>
     </tbody>
+    <ng-template #loading>
+      <tbody>
+        <tr>
+          <td colspan="9">Loading data...</td>
+        </tr>
+        <!-- Add more placeholder rows if necessary -->
+      </tbody>
+    </ng-template>
   </table>
 </ng-container>

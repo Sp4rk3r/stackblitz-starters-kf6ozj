@@ -1,18 +1,9 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, catchError, throwError, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { BaseResponse } from '../models/base-response';
 import { Country } from '../models/country';
-import {
-  FootballStanding,
-  LeagueData,
-  ResponseData,
-} from '../models/football-standing';
+import { ResponseData } from '../models/football-standing';
 import { Leagues } from '../models/leagues';
 
 @Injectable()
@@ -28,10 +19,7 @@ export class FootballService {
       .get<BaseResponse<Leagues[]>>(
         `/leagues?name=${leagueName}&country=${country}&season=${new Date().getFullYear()}`
       )
-      .pipe(
-        map((data) => data.response[0]),
-        
-      );
+      .pipe(map((data) => data.response[0]));
   }
 
   getStanding(leagueId: number): Observable<ResponseData[]> {
