@@ -1,5 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Observable, of, switchMap } from 'rxjs';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 import { BaseResponse } from './app/models/base-response';
 import { CountryLeague } from './app/models/country-league';
 import {
@@ -17,7 +18,13 @@ import { FootballService } from './app/services/football.service';
 })
 export class AppComponent {
   title = 'recipe-database';
-  countries: CountryLeague[] = [{name:'England', league:'Premier League'},{name:'Spain', league:'La Liga'},{name:'Germany', league:'Bundesliga'},{name:'France', league:'Ligue 1'},{name:'Italy', league:'Serie A'}];
+  countries: CountryLeague[] = [
+    { name: 'England', league: 'Premier League' },
+    { name: 'Spain', league: 'La Liga' },
+    { name: 'Germany', league: 'Bundesliga' },
+    { name: 'France', league: 'Ligue 1' },
+    { name: 'Italy', league: 'Serie A' },
+  ];
   standings$: Observable<ResponseData[]> = of();
 
   constructor(private footballService: FootballService) {}
@@ -30,6 +37,9 @@ export class AppComponent {
         switchMap((resp: Leagues) => {
           const leagueId = resp.league.id;
           return this.footballService.getStanding(leagueId);
+        }),
+        catchError((err) => {
+          return of(err);
         })
       );
   }
